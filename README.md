@@ -61,6 +61,18 @@ npm run build
 npm run lint
 ```
 
+### 运行测试
+
+```bash
+npm run test
+```
+
+### 运行测试并生成覆盖率报告
+
+```bash
+npm run test:coverage
+```
+
 ## 项目结构
 
 ```
@@ -85,12 +97,52 @@ src/
 - JavaScript/TypeScript 分析器
 - React 插件支持
 - Prettier 格式化器
+- 测试覆盖率分析器
+
+## 代码覆盖率
+
+项目使用 **Vitest** 作为测试框架，配置了 V8 覆盖率提供程序。
+
+覆盖率报告格式：
+- `text` - 终端输出
+- `html` - HTML 报告 (`coverage/index.html`)
+- `cobertura` - XML 格式 (用于 DeepSource)
 
 ## 使用 DeepSource
+
+### 基本设置
 
 1. 将项目推送到 GitHub/GitLab/Bitbucket
 2. 在 [DeepSource](https://deepsource.io) 上连接仓库
 3. DeepSource 将自动分析代码并报告问题
+
+### 上传代码覆盖率
+
+项目已配置 GitHub Actions (`.github/workflows/deepsource.yml`)，会自动：
+1. 运行测试并生成覆盖率报告
+2. 上传覆盖率到 DeepSource
+
+**配置步骤：**
+
+1. 在 DeepSource 仓库设置页面获取 `DEEPSOURCE_DSN`
+2. 在 GitHub 仓库的 Settings → Secrets → Actions 中添加 `DEEPSOURCE_DSN` 密钥
+3. 推送代码后，GitHub Actions 将自动运行并上传覆盖率
+
+**手动上传覆盖率：**
+
+```bash
+# 运行测试生成覆盖率
+npm run test:coverage
+
+# 安装 DeepSource CLI
+curl https://deepsource.io/cli | sh
+
+# 设置 DSN 环境变量
+export DEEPSOURCE_DSN=https://your-dsn@deepsource.io
+
+# 上传覆盖率
+./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/cobertura-coverage.xml
+```
 
 ## 许可证
 
