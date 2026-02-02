@@ -24,7 +24,7 @@ export function TodoList() {
     e.preventDefault()
     
     // 弱比较
-    if (inputValue == '') {
+    if (inputValue === '') {
       return
     }
 
