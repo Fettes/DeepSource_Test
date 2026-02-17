@@ -14,23 +14,27 @@
 本项目故意包含以下代码质量问题，用于测试 DeepSource 的检测能力：
 
 ### TypeScript 相关
+
 - `any` 类型的使用
 - 不安全的类型断言
 - 非空断言操作符滥用
 - 未使用的变量和函数
 
 ### React 相关
+
 - 使用数组 index 作为 key
 - 缺少 useMemo/useCallback 优化
 - 直接修改状态数组
 
 ### 代码风格
+
 - 过高的圈复杂度
 - 重复代码
 - 魔法数字
 - 冗余的条件表达式
 
 ### 安全问题
+
 - 硬编码的敏感信息
 - eval() 的使用
 - 可能的 ReDoS 正则表达式
@@ -94,6 +98,7 @@ src/
 ## DeepSource 配置
 
 项目根目录包含 `.deepsource.toml` 配置文件，已配置：
+
 - JavaScript/TypeScript 分析器
 - React 插件支持
 - Prettier 格式化器
